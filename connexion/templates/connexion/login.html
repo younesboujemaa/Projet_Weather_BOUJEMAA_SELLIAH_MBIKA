@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <nav class="row" style="background: skyblue; color: white;">
+    <div align="center" ><h1 class="col-md-3 text-center"> AUNTHENTIFICATION</h1></div>
+  </nav>
+    <p>{{ message }}</p>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" >Se connecter </button>
+    </form>
+
+    <p>Pas encore membre ? <a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a></p>
+    <p>Retourner en arrière <a href="{% url 'index' %}">Appuyez ici !</a></p> 
+{% endblock content %}

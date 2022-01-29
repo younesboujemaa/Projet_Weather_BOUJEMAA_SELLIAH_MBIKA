@@ -1,0 +1,169 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>weather</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+   <nav id="header" class="row">
+     <div  align="center" >
+     </div>
+   </nav>
+  <div align="right">
+    <button class="bouton">Déjà membre ?
+     <a href="{% url 'login' %}"> &ensp; Connectez vous maintenant !</a>
+    </button>
+  </div>
+   <br>
+  <div align="right">
+    <button class="bouton">Pas encore membre ?
+        <a href="{% url 'signup' %}"> &ensp; Inscrivez-vous maintenant !</a>
+    </button>
+  </div>
+  <div id="meteo">
+  <center class="row">
+    <form action="" method="post" class="col-md-6 col-md-offset-3">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type="text" class="form-control" name="city" placeholder="Une erreur s'est produite !">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+    </form>
+  </center>
+  </div>
+
+<div class="row">
+    {% if city is not None %}
+        <div class="col-md-6 col-md-offset-3">
+            <h1>{{ city | capfirst }}</h1>
+            <div id='desc'>
+                <h3>Description: {{ data.weather_description | capfirst }}</h1>
+                    <div id='imageContainer'><img src='http://openweathermap.org/img/w/{{ data.weather_icon }}.png'>
+                    </div>
+            </div>
+            <h3>Temperature: {{ data.weather_temperature }}°</h3>
+            <h3>Pressure: {{ data.weather_pressure }}</h3>
+            <h3>Humidity: {{ data.weather_humidity }}</h3>
+            <h3>Wind : {{ data.weather_wind }}m/s</h3>
+            <h3>Air Quality : {{ data.weather_pollution }}</h3>
+        </div>
+    {% endif %}
+</div>
+</body>
+
+<style>
+    body{
+        overflow: hidden;
+    }
+
+    #titre{
+        font-family: Pristina;
+        font-size: 55px;
+        position: relative;
+        left: 50px;
+        top: 15px;
+    }
+
+    #imageContainer{
+        width: 80px;
+        height: 80px;
+    }
+    #imageContainer img{
+        height: 100%;
+        width: 100%;
+    }
+    #desc{
+        display: flex;
+        align-items: center;
+    }
+
+    nav#header.row{
+        height:130px;
+    }
+
+    body{
+        background-image:url("https://wallpaperaccess.com/full/58330.jpg");
+
+    }
+
+    .bouton{
+        align-items: center;
+        appearance: none;
+        background-color: #fff;
+        border-radius: 24px;
+        border-style: none;
+        box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+        box-sizing: border-box;
+        color: #3c4043;
+        cursor: pointer;
+        display: inline-flex;
+        fill: currentcolor;
+        font-family: "Google Sans",Roboto,Arial,sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 48px;
+        justify-content: center;
+        letter-spacing: .25px;
+        line-height: normal;
+        max-width: 100%;
+        overflow: visible;
+        padding: 2px 24px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: auto;
+        will-change: transform,opacity;
+        z-index: 0;
+        bottom: 120px;
+        right: 25px;
+    }
+    .bouton:focus {
+        outline: none;
+        border: 2px solid #4285f4;
+    }
+    .bouton:hover {
+        background: #F6F9FE;
+        color: #174ea6;
+    }
+    .bouton:active {
+        box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+        outline: none;
+    }
+    .bouton:not(:disabled) {
+        box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+    }
+    .bouton:not(:disabled):hover {
+        box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+    }
+    .bouton:not(:disabled):focus {
+        box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+    }
+    .bouton:not(:disabled):active {
+        box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+    }
+    .bouton:disabled {
+        box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+    }
+
+</style>
+
+</html>

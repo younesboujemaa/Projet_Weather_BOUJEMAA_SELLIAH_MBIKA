@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <nav class="row" style="background: skyblue; color: white;">
+    <div align="center" ><h1 class="col-md-3 text-center"> INSCRIPTION</h1></div>
+  </nav>
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" >S’inscrire</button>
+    </form>
+    <p>Retourner en arrière <a href="{% url 'index' %}">Appuyez ici !</a></p> 
+{% endblock content %}
